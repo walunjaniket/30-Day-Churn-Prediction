@@ -1,8 +1,10 @@
 # 30-Day-Churn-Prediction
 A 30-day advance customer churn prediction system using XGBoost with dominant driver identification for high-LTV customers. Achieved Precision @ Top 10% = 0.843 and AUC = 0.746 (time-split validation). Enables targeted retention campaigns and ROI-driven customer insights.
 
-# 30-Day Advance Churn Prediction  
-**Predict customer churn 30 days in advance using transaction data**
+# 🧠 30-Day Advance Churn Prediction
+
+**Predict customer churn 30 days in advance** using transactional data, with **dominant driver identification** for **high-LTV customers**.  
+Built with **XGBoost**, time-based validation, and interpretable churn drivers for actionable business insights.
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-orange.svg)](https://xgboost.ai/)
@@ -10,43 +12,90 @@ A 30-day advance customer churn prediction system using XGBoost with dominant dr
 
 ---
 
-## Project Overview
+## 🚀 Project Overview
 
-This project predicts which **loyal customers** (≥2 purchases in last 90 days) will **not make a purchase in the next 30 days**, enabling **proactive retention campaigns**.
+This project predicts which **loyal customers** (≥2 purchases in the past 90 days) will **not purchase again in the next 30 days**, enabling **proactive retention campaigns** and **ROI-driven decision-making**.
 
-- **Dataset**: [Online Retail II](https://archive.ics.uci.edu/ml/datasets/Online+Retail+II) (UCI ML Repository)  
-- **Model**: XGBoost Classifier (hyperparameter-tuned)  
-- **Key Metric**: **Precision @ Top 10% Risk = 0.843** (time-split validation)  
-- **Validation**: June/July → August 2011 (no data leakage)
+- **Dataset:** [Online Retail II](https://archive.ics.uci.edu/ml/datasets/Online+Retail+II) (UCI ML Repository)  
+- **Algorithm:** XGBoost Classifier (hyperparameter-tuned)  
+- **Validation:** June–July → August 2011 (time-based split, no data leakage)  
+- **Key Metric:** Precision @ Top 10% = **0.843**, AUC = **0.746**
 
-> **84.3% of flagged customers actually churn** — only **1 in 6.3 interventions is a false positive.**
-
----
-
-## Business Impact
-
-| Metric | Value |
-|--------|-------|
-| **Precision @ Top 10%** | **0.843** |
-| **AUC** | **0.746** |
-| **True churners saved per 1,000 targeted** | **843** |
-| **Net profit (at $200 CLV, $5 cost)** | **$163,600** |
-| **ROI** | **32.7x** |
-
-> **$32.70 profit per $1 spent on retention**
+> 🎯 **84.3% of flagged customers actually churned** — only **1 in 6.3 interventions** was unnecessary.
 
 ---
 
-## Project Structure
-.
-├── online_retail_II.csv              # Input dataset
-├── churn_prediction.ipynb            # Full analysis (Jupyter)
-├── 30_day_churn_model_v1.pkl         # Trained model
-├── model_features_v1.pkl             # Feature list
-├── cleaned_dataframe.csv             # Cleaned data
-├── customer_summary.csv              # Aggregated customer stats
-├── master_dataset.csv                # Final modeling dataset
+## 💼 Business Impact
+
+| Metric | Value | Description |
+|--------|-------|-------------|
+| **Precision @ Top 10%** | **0.843** | 84.3% of flagged customers churned |
+| **AUC** | **0.746** | Strong overall ranking power |
+| **True churners saved (per 1,000)** | **843** | Estimated recoveries from retention actions |
+| **Net profit (at $200 CLV, $5 cost)** | **$163,600** | Profit from targeted retention |
+| **ROI** | **32.7×** | **$32.70 profit per $1 spent** |
+
+> 💰 *Every dollar spent on retention returns $32.70 in saved revenue.*
+
+---
+
+## 🧩 Project Structure
+30-day-churn-prediction/
+├── online_retail_II.csv # Raw input dataset
+├── cleaned_dataframe.csv # Cleaned transactional data
+├── customer_summary.csv # Aggregated customer metrics
+├── master_dataset.csv # Final modeling dataset
+├── churn_prediction.ipynb # Main analysis notebook
+├── 30_day_churn_model_v1.pkl # Trained XGBoost model
+├── model_features_v1.pkl # Feature list for inference
 └── README.md
+
+---
+
+## ⚙️ How It Works
+
+### 1. Data Cleaning
+- Remove missing `Customer ID`, negative `Quantity` or `Price`
+- Add `total_amount = Quantity × Price`
+
+### 2. Snapshot-Based Labeling
+- **Observation window:** 90 days prior to snapshot  
+- **Prediction window:** 30 days ahead  
+- **Label:** `churn = 1` if no purchase in the next 30 days  
+
+### 3. Feature Engineering
+- **Behavioral features:** `avg_basket`, `invoice_count`, `spend_drop` (early vs late 45 days)  
+- **Lifetime metrics:** `total_spend`, `country`, and heuristic churn `driver` (`price`, `quality`, `adoption`, `competition`)  
+- **High-LTV flag:** top 2% spenders
+
+### 4. Modeling
+- XGBoost with `scale_pos_weight` to address imbalance  
+- Hyperparameter tuning via `GridSearchCV` (AUC & precision)  
+- Final parameters: `n_estimators=200`, `max_depth=5`, `learning_rate=0.01`, etc.
+
+### 5. Validation
+- **Train:** June–July 2011  
+- **Test:** August 2011  
+- **Result:** Precision @ 10% = **0.843**, AUC = **0.746**
+
+---
+
+## 🧠 Dominant Churn Driver Identification
+Each churned customer is categorized by likely cause:
+- `price` → Spend drop or discount sensitivity  
+- `quality` → Low average basket value  
+- `adoption` → Few repeat orders  
+- `competition` → Normal spend but inactive later  
+
+This enables **personalized retention actions**:
+| Driver | Recommended Action |
+|---------|--------------------|
+| price | Offer targeted discounts |
+| quality | Highlight premium products |
+| adoption | Send onboarding or reactivation nudges |
+| competition | Launch loyalty rewards |
+
+---
 
 
 ---
@@ -80,22 +129,27 @@ This project predicts which **loyal customers** (≥2 purchases in last 90 days)
 
 ## How to Run
 
-```bash
-# 1. Clone repo
-git clone https://github.com/yourusername/30-day-churn-prediction.git
-cd 30-day-churn-prediction
+1. **Clone repo:**
+   ```bash
+   git clone https://github.com/yourusername/30-day-churn-prediction.git
+   cd 30-day-churn-prediction
 
-# 2. Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-venv\Scripts\activate     # Windows
+2. **Create virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/Mac
+   or
+   venv\Scripts\activate     # Windows
 
-# 3. Install dependencies
-pip install pandas numpy scikit-learn xgboost joblib jupyter
+3. **Install dependencies:**
+   ```bash
+   pip install pandas numpy scikit-learn xgboost joblib jupyter
 
-# 4. Run notebook
-jupyter notebook churn_prediction.ipynb
+4. **Run notebook:**
+   ```bash
+   jupyter notebook churn_prediction.ipynb
+
+---
 
 import joblib
 import pandas as pd
@@ -110,11 +164,4 @@ threshold = np.percentile(proba, 90)
 X_new['churn_risk'] = proba
 X_new['action_required'] = proba >= threshold
 
-Author
-Aniket
-LinkedIn | GitHub
 
-License
-MIT License – Free to use, modify, and distribute.
-
-Built with 💻 and ☕ in 2025
