@@ -165,4 +165,17 @@ This enables **personalized retention actions**:
    X_new['churn_risk'] = proba
    X_new['action_required'] = proba >= threshold
 
+   ```
 
+ ---
+
+## 👤 Author
+**Aniket Walunj**  
+Data Science Enthusiast | Machine Learning & Survival Analysis Project 
+[LinkedIn](https://www.linkedin.com/in/aniket-walunj-93a07864/)
+[GitHub](https://github.com/walunjaniket)
+
+##License
+MIT License – Free to use, modify, and distribute.
+
+Built with 💻 and ☕ in 2025
