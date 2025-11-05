@@ -151,17 +151,18 @@ This enables **personalized retention actions**:
 
 ---
 
-import joblib
-import pandas as pd
-
-model = joblib.load("30_day_churn_model_v1.pkl")
-features = joblib.load("model_features_v1.pkl")
-
-# X_new: DataFrame with same features as training
-X_new = X_new[features]  # Ensure column order & one-hot encoding
-proba = model.predict_proba(X_new)[:, 1]
-threshold = np.percentile(proba, 90)
-X_new['churn_risk'] = proba
-X_new['action_required'] = proba >= threshold
+   ```bash
+   import joblib
+   import pandas as pd
+   
+   model = joblib.load("30_day_churn_model_v1.pkl")
+   features = joblib.load("model_features_v1.pkl")
+   
+   # X_new: DataFrame with same features as training
+   X_new = X_new[features]  # Ensure column order & one-hot encoding
+   proba = model.predict_proba(X_new)[:, 1]
+   threshold = np.percentile(proba, 90)
+   X_new['churn_risk'] = proba
+   X_new['action_required'] = proba >= threshold
 
 
