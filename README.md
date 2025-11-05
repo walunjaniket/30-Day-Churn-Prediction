@@ -35,15 +35,18 @@ This project predicts which **loyal customers** (≥2 purchases in the past 90 d
 ---
 
 ## 🧩 Project Structure
+
+```bash
 30-day-churn-prediction/
-├── online_retail_II.csv # Raw input dataset
-├── cleaned_dataframe.csv # Cleaned transactional data
-├── customer_summary.csv # Aggregated customer metrics
-├── master_dataset.csv # Final modeling dataset
-├── churn_prediction.ipynb # Main analysis notebook
-├── 30_day_churn_model_v1.pkl # Trained XGBoost model
-├── model_features_v1.pkl # Feature list for inference
+├── online_retail_II.csv           # Raw input dataset
+├── cleaned_dataframe.csv          # Cleaned transactional data
+├── customer_summary.csv           # Aggregated customer metrics
+├── master_dataset.csv             # Final modeling dataset
+├── churn_prediction.ipynb         # Main analysis notebook
+├── 30_day_churn_model_v1.pkl      # Trained XGBoost model
+├── model_features_v1.pkl          # Feature list for inference
 └── README.md
+```
 
 ---
 
