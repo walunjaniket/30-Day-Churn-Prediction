@@ -1,12 +1,7 @@
 # 30-Day-Churn-Prediction
 A 30-day advance customer churn prediction system using XGBoost with dominant driver identification for high-LTV customers. Achieved Precision @ Top 10% = 0.843 and AUC = 0.746 (time-split validation). Enables targeted retention campaigns and ROI-driven customer insights.
 
-# 🧠 30-Day Advance Churn Prediction
-
-**Predict customer churn 30 days in advance** using transactional data, with **dominant driver identification** for **high-LTV customers**.  
-Built with **XGBoost**, time-based validation, and interpretable churn drivers for actionable business insights.
-
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-orange.svg)](https://xgboost.ai/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -49,6 +44,13 @@ This project predicts which **loyal customers** (≥2 purchases in the past 90 d
 ├── 30_day_churn_model_v1.pkl # Trained XGBoost model
 ├── model_features_v1.pkl # Feature list for inference
 └── README.md
+
+---
+
+### Screenshots
+![EDA Plot](EDA_plots_1.png)
+![Monthly Sales Plot](monthly_sales.png)
+![Feature Correlation Map](feature_correlation_map.png)
 
 ---
 
