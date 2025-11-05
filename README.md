@@ -1,5 +1,5 @@
 # 30-Day-Churn-Prediction
-A 30-day advance customer churn prediction system using XGBoost with dominant driver identification for high-LTV customers. Achieved Precision @ Top 10% = 0.843 and AUC = 0.746 (time-split validation). Enables targeted retention campaigns and ROI-driven customer insights.
+A 30-day advance customer churn prediction system using XGBoost with dominant driver analysis for high-LTV customers. Precision improved from 0.525 → 0.843 and AUC from 0.722 → 0.746 (time-split validation). Enables targeted, ROI-driven retention campaigns.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-orange.svg)](https://xgboost.ai/)
@@ -54,34 +54,6 @@ This project predicts which **loyal customers** (≥2 purchases in the past 90 d
 
 ---
 
-## ⚙️ How It Works
-
-### 1. Data Cleaning
-- Remove missing `Customer ID`, negative `Quantity` or `Price`
-- Add `total_amount = Quantity × Price`
-
-### 2. Snapshot-Based Labeling
-- **Observation window:** 90 days prior to snapshot  
-- **Prediction window:** 30 days ahead  
-- **Label:** `churn = 1` if no purchase in the next 30 days  
-
-### 3. Feature Engineering
-- **Behavioral features:** `avg_basket`, `invoice_count`, `spend_drop` (early vs late 45 days)  
-- **Lifetime metrics:** `total_spend`, `country`, and heuristic churn `driver` (`price`, `quality`, `adoption`, `competition`)  
-- **High-LTV flag:** top 2% spenders
-
-### 4. Modeling
-- XGBoost with `scale_pos_weight` to address imbalance  
-- Hyperparameter tuning via `GridSearchCV` (AUC & precision)  
-- Final parameters: `n_estimators=200`, `max_depth=5`, `learning_rate=0.01`, etc.
-
-### 5. Validation
-- **Train:** June–July 2011  
-- **Test:** August 2011  
-- **Result:** Precision @ 10% = **0.843**, AUC = **0.746**
-
----
-
 ## 🧠 Dominant Churn Driver Identification
 Each churned customer is categorized by likely cause:
 - `price` → Spend drop or discount sensitivity  
@@ -96,9 +68,6 @@ This enables **personalized retention actions**:
 | quality | Highlight premium products |
 | adoption | Send onboarding or reactivation nudges |
 | competition | Launch loyalty rewards |
-
----
-
 
 ---
 
