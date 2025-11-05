@@ -125,6 +125,19 @@ This enables **personalized retention actions**:
 
 ---
 
+## Requirements
+
+All project dependencies are listed in the requirements.txt file.
+You can install them with the following command:
+   ```bash
+   pip install -r requirements.txt
+```
+This will automatically install all required libraries (e.g., pandas, numpy, scikit-learn, xgboost, joblib, jupyter) to reproduce the analysis and results.
+
+---
+
+## Example Code
+
    ```bash
    import joblib
    import pandas as pd
