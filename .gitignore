@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv
+env/
+venv/
+.ipynb_checkpoints
+
+# Data & models
+data/
+models/
+*.parquet
+
+# macOS
+.DS_Store
+
+# Ignore temporary files
+*.log
+*.tmp
+
+# Ignore large local files (optional)
+Project_Resources/*.mp4
+Project_Resources/*.zip
