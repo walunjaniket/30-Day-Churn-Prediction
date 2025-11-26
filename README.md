@@ -1,5 +1,5 @@
 # 30-Day-Churn-Prediction
-A 30-day advance customer churn prediction system using XGBoost with dominant driver analysis for high-LTV customers. Precision improved from 0.525 → 0.843 and AUC from 0.722 → 0.746 (time-split validation). Enables targeted, ROI-driven retention campaigns.
+A 30-day advance customer churn prediction system using XGBoost with dominant driver analysis for high-LTV customers. Precision improved from 0.525 → 0.843 (0.921 in the latest release) and AUC from 0.722 → 0.746 (time-split validation). Enables targeted, ROI-driven retention campaigns.
 
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-1.7+-orange.svg)](https://xgboost.ai/)
@@ -14,9 +14,9 @@ This project predicts which **loyal customers** (≥2 purchases in the past 90 d
 - **Dataset:** [Online Retail II](https://archive.ics.uci.edu/ml/datasets/Online+Retail+II) (UCI ML Repository)  
 - **Algorithm:** XGBoost Classifier (hyperparameter-tuned)  
 - **Validation:** June–July → August 2011 (time-based split, no data leakage)  
-- **Key Metric:** Precision @ Top 10% = **0.843**, AUC = **0.746**
+- **Key Metric:** Precision @ Top 10% = **0.921**, AUC = **0.746**
 
-> 🎯 **84.3% of flagged customers actually churned** — only **1 in 6.3 interventions** was unnecessary.
+> 🎯 **92.1% of flagged customers actually churned** — only **1 in 12.7 interventions** was unnecessary.
 
 ---
 
@@ -24,13 +24,13 @@ This project predicts which **loyal customers** (≥2 purchases in the past 90 d
 
 | Metric | Value | Description |
 |--------|-------|-------------|
-| **Precision @ Top 10%** | **0.843** | 84.3% of flagged customers churned |
+| **Precision @ Top 10%** | **0.921** | 92.1% of flagged customers churned |
 | **AUC** | **0.746** | Strong overall ranking power |
-| **True churners saved (per 1,000)** | **843** | Estimated recoveries from retention actions |
-| **Net profit (at $200 CLV, $5 cost)** | **$163,600** | Profit from targeted retention |
-| **ROI** | **32.7×** | **$32.70 profit per $1 spent** |
+| **True churners saved (per 1,000)** | **921** | Estimated recoveries from retention actions |
+| **Net profit (at $200 CLV, $5 cost)** | **$183,700** | Profit from targeted retention |
+| **ROI** | **36.7×** | **$36.70 profit per $1 spent** |
 
-> 💰 *Every dollar spent on retention returns $32.70 in saved revenue.*
+> 💰 *Every dollar spent on retention returns $36.70 in saved revenue.*
 
 ---
 
@@ -77,11 +77,11 @@ This enables **personalized retention actions**:
 4. **Modeling**  
    - XGBoost with `scale_pos_weight` for class imbalance  
    - Hyperparameter tuning (commented in notebook)  
-   - Final model: `n_estimators=200`, `max_depth=5`, etc.
+   - Final model: `n_estimators=200`, `max_depth=3`, etc.
 
 5. **Validation**  
    - **Time-split**: Train on June/July → Test on August  
-   - **Result**: Precision @ 10% = **0.843**, AUC = **0.746**
+   - **Result**: Precision @ 10% = **0.921**, AUC = **0.746**
 
 ---
 
@@ -105,7 +105,7 @@ This enables **personalized retention actions**:
 
 4. **Run notebook:**
    ```bash
-   jupyter notebook churn_prediction.ipynb
+   jupyter notebook 30-Day Advance Churn Prediction_v2.ipynb
 
 ---
 
@@ -126,8 +126,8 @@ This will automatically install all required libraries (e.g., pandas, numpy, sci
    import joblib
    import pandas as pd
    
-   model = joblib.load("30_day_churn_model_v1.pkl")
-   features = joblib.load("model_features_v1.pkl")
+   model = joblib.load("30_day_churn_model_v2.pkl")
+   features = joblib.load("model_features_v2.pkl")
    
    # X_new: DataFrame with same features as training
    X_new = X_new[features]  # Ensure column order & one-hot encoding
